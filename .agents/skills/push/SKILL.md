@@ -82,8 +82,8 @@ Se todas as verificações passarem, exibir antes de prosseguir:
 
 1. **⚠️ OBRIGATÓRIO — Garantir identidade Git correta antes de qualquer commit:**
    ```bash
-   git config user.email "oficialtaevo@gmail.com"
-   git config user.name "Klismam Aires"
+   git config user.email "dev@taevo.com.br"
+   git config user.name "devtaevo"
    ```
    > Executar **sempre**, no início, sem exceção, para conformidade de autoria do repositório.
 
