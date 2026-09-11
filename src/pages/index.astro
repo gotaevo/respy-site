@@ -1,17 +1,12 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Respy | Início" description="Bem-vindo ao site da Respy.">
+	<main style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; text-align: center; padding: 2rem;">
+		<h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Bem-vindo ao Respy</h1>
+		<p style="font-size: 1.25rem; color: #666; max-width: 600px;">
+			Projeto configurado com sucesso com Astro.
+		</p>
+	</main>
+</BaseLayout>

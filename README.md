@@ -1,43 +1,34 @@
-# Astro Starter Kit: Minimal
+# Respy Site
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Website institucional da Respy desenvolvido com [Astro](https://astro.build).
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🚀 Tecnologias
 
-## 🚀 Project Structure
+- **Framework:** Astro 5
+- **Linguagem:** TypeScript
+- **Node.js:** >= 22.12.0
 
-Inside of your Astro project, you'll see the following folders and files:
+## 📁 Estrutura do Projeto
 
 ```text
 /
-├── public/
+├── public/              # Arquivos estáticos (favicon, etc.)
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── layouts/         # Layouts base da aplicação (BaseLayout.astro)
+│   └── pages/           # Rotas do site (index.astro, etc.)
+├── astro.config.mjs     # Configuração do Astro
+└── package.json         # Dependências e scripts
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+> **Nota:** Arquivos e materiais de referência locais ficam na pasta `referencia/`, que é ignorada pelo Git (`.gitignore`) para manter o repositório leve.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 🧞 Comandos
 
-Any static assets, like images, can be placed in the `public/` directory.
+Todos os comandos são executados a partir da raiz do projeto:
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| Comando           | Ação                                              |
+| :---------------- | :------------------------------------------------ |
+| `npm install`     | Instala as dependências                           |
+| `npm run dev`     | Inicia o servidor de desenvolvimento em `localhost:4321` |
+| `npm run build`   | Compila o site para produção na pasta `./dist/`   |
+| `npm run preview` | Pré-visualiza o build de produção localmente      |
