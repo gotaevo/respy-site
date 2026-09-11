@@ -1,12 +1,103 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SvgDefs from '../components/SvgDefs.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import TrustedBy from '../components/TrustedBy.astro';
+import Bottleneck from '../components/Bottleneck.astro';
+import Features from '../components/Features.astro';
+import Usecases from '../components/Usecases.astro';
+import RevenueEngine from '../components/RevenueEngine.astro';
+import CustomerStories from '../components/CustomerStories.astro';
+import Pricing from '../components/Pricing.astro';
+import About from '../components/About.astro';
+import Blog from '../components/Blog.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<BaseLayout title="Respy | Início" description="Bem-vindo ao site da Respy.">
-	<main style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; text-align: center; padding: 2rem;">
-		<h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Bem-vindo ao Respy</h1>
-		<p style="font-size: 1.25rem; color: #666; max-width: 600px;">
-			Projeto configurado com sucesso com Astro.
-		</p>
-	</main>
+<BaseLayout
+	title="Respy — CRM e atendimento no WhatsApp"
+	description="Organize o atendimento da sua empresa no WhatsApp, acompanhe cada lead e automatize follow-ups com o Respy."
+	lang="pt-BR"
+>
+	<div data-framer-generated-page="" id="main">
+		<div
+			class="framer-gsDDa framer-WBrhW framer-yAJxk framer-9OjJ3 framer-0FlRU framer-1fuuwg"
+			data-layout-template="true"
+			data-selection="true"
+			style="--1vm7ife:130px 0px 0px 0px;--ihjje9:110px 0px 0px 0px;min-height:100vh;width:auto"
+		>
+			<div
+				class="framer-VZ7wD framer-RXgLj framer-EhUGu framer-l5XXk framer-9OjJ3 framer-yAJxk framer-0FlRU framer-wn90E framer-guVoT framer-72rtr7"
+				data-framer-root=""
+				style="min-height:100vh;width:auto;display:contents"
+			>
+				<div class="framer-eywkka" data-framer-name="Header change trigger" id="header-change"></div>
+				<main class="framer-1v8dk9r" data-framer-name="Main">
+					<Hero />
+					<TrustedBy />
+					<Bottleneck />
+					<Features />
+					<Usecases />
+					<RevenueEngine />
+					<CustomerStories />
+					<Pricing />
+					<About />
+					<Blog />
+					<FAQ />
+					<CTA />
+				</main>
+				<div id="overlay"></div>
+				<div class="framer-5gd35e"></div>
+				<Header />
+				<Footer />
+			</div>
+		</div>
+	</div>
+
+	<SvgDefs />
+
+	<script>
+		// Smooth anchor scrolling
+		document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+			anchor.addEventListener('click', function (e) {
+				const href = this.getAttribute('href');
+				if (href && href !== '#') {
+					const target = document.querySelector(href);
+					if (target) {
+						e.preventDefault();
+						target.scrollIntoView({ behavior: 'smooth' });
+					}
+				}
+			});
+		});
+
+		// Header sticky / scroll blur effect
+		const headerNav = document.querySelector('.framer-wbdz5-container');
+		if (headerNav) {
+			const onScroll = () => {
+				if (window.scrollY > 40) {
+					headerNav.classList.add('scrolled');
+				} else {
+					headerNav.classList.remove('scrolled');
+				}
+			};
+			window.addEventListener('scroll', onScroll, { passive: true });
+			onScroll();
+		}
+
+		// Alternância entre os planos mensal e anual
+		const monthlyBtn = document.querySelector('[data-framer-name="Mensal"]');
+		const annualBtn = document.querySelector('[data-framer-name="Anual"]');
+		const priceSpans = document.querySelectorAll('number-flow-react span, .framer-text span');
+
+		// FAQ Accordion
+		document.querySelectorAll('[data-framer-name="FAQ"] .framer-1tza9rs').forEach((faqItem) => {
+			faqItem.addEventListener('click', () => {
+				faqItem.classList.toggle('active');
+			});
+		});
+	</script>
 </BaseLayout>

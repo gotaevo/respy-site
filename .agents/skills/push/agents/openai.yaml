@@ -1,0 +1,4 @@
+interface:
+  display_name: "Push Seguro"
+  short_description: "Push seguro e autônomo ao GitHub com CI local e validação"
+  default_prompt: "Use $push para validar, commitar e enviar alterações ao GitHub."

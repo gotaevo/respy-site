@@ -1,0 +1,4 @@
+interface:
+  display_name: "Copywriting"
+  short_description: "Write and rewrite high-converting marketing copy for pages and ads"
+  default_prompt: "Use $copywriting to write or improve marketing copy for this project."
