@@ -28,17 +28,20 @@
 							<div class="framer-1krqbvw">
 								<div class="framer-4j6m4t-container">
 									<svg xmlns="http://www.w3.org/2000/svg" width="608" height="30" fill="none" viewBox="0 0 608 30" style="width: 100%; height: 100%;">
-										<path stroke="#DCDCDC" stroke-width="2" d="M0 1.5h69.184a15 15 0 0 1 10.73 4.518l18.038 18.464A15 15 0 0 0 108.682 29h295.913a15 15 0 0 0 10.676-4.463l18.824-19.074A15 15 0 0 1 444.771 1H607.5"/>
+										<path stroke="#DCDCDC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M0 1.5h69.184a15 15 0 0 1 10.73 4.518l18.038 18.464A15 15 0 0 0 108.682 29h295.913a15 15 0 0 0 10.676-4.463l18.824-19.074A15 15 0 0 1 444.771 1H607.5"/>
+										<path class="shimmer-pulse pulse-top" pathLength="100" stroke-dasharray="35 100" stroke="#0E82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M0 1.5h69.184a15 15 0 0 1 10.73 4.518l18.038 18.464A15 15 0 0 0 108.682 29h295.913a15 15 0 0 0 10.676-4.463l18.824-19.074A15 15 0 0 1 444.771 1H607.5"/>
 									</svg>
 								</div>
 								<div class="framer-1vqkf2g-container">
 									<svg xmlns="http://www.w3.org/2000/svg" width="608" height="2" fill="none" viewBox="0 0 608 2" style="width: 100%; height: 100%;">
-										<path stroke="#DCDCDC" stroke-width="2" d="M0 1h608"/>
+										<path stroke="#DCDCDC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M0 1h608"/>
+										<path class="shimmer-pulse pulse-center" pathLength="100" stroke-dasharray="35 100" stroke="#0E82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M0 1h608"/>
 									</svg>
 								</div>
 								<div class="framer-tbzhx4-container">
 									<svg xmlns="http://www.w3.org/2000/svg" width="610" height="43" fill="none" viewBox="0 0 610 43" style="width: 100%; height: 100%;">
-										<path stroke="#DCDCDC" stroke-width="2" d="M0 40.5h104.287a15 15 0 0 0 10.606-4.393l30.714-30.714A14.999 14.999 0 0 1 156.213 1h375.074c3.978 0 7.793 1.58 10.606 4.393l31.714 31.714a15 15 0 0 0 10.606 4.393H610"/>
+										<path stroke="#DCDCDC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M0 40.5h104.287a15 15 0 0 0 10.606-4.393l30.714-30.714A14.999 14.999 0 0 1 156.213 1h375.074c3.978 0 7.793 1.58 10.606 4.393l31.714 31.714a15 15 0 0 0 10.606 4.393H610"/>
+										<path class="shimmer-pulse pulse-bottom" pathLength="100" stroke-dasharray="35 100" stroke="#0E82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M0 40.5h104.287a15 15 0 0 0 10.606-4.393l30.714-30.714A14.999 14.999 0 0 1 156.213 1h375.074c3.978 0 7.793 1.58 10.606 4.393l31.714 31.714a15 15 0 0 0 10.606 4.393H610"/>
 									</svg>
 								</div>
 							</div>
@@ -59,7 +62,7 @@
 							<div class="framer-fuyh3o-container bottleneck-floating-chip">
 								<div class="framer-yMgn4 framer-x5df2h framer-v-x5df2h bottleneck-chip-shadow" data-framer-name="With shadow" style="height: 100%; width: 100%;">
 									<div data-framer-background-image-wrapper="true" style="position:absolute;border-radius:inherit;corner-shape:inherit;top:0;right:0;bottom:0;left:0">
-										<img alt="" decoding="auto" height="700" loading="lazy" sizes="(min-width: 1200px) calc(100vw * 0.875), (min-width: 810px) and (max-width: 1199.98px) calc(100vw * 0.875), (max-width: 809.98px) calc(100vw * 0.875)" src="/assets/81a2e5e4c1b6126b_xqMJGUmEFbip0YgmQZd8GFdPE.png" srcset="/assets/81a2e5e4c1b6126b_xqMJGUmEFbip0YgmQZd8GFdPE.png 512w, /assets/40b325dcbd04c5c4_xqMJGUmEFbip0YgmQZd8GFdPE.png 700w" style="display:block;width:100%;height:100%;border-radius:inherit;corner-shape:inherit;object-position:center;object-fit:cover" width="700"/>
+										<img alt="Respy" decoding="auto" height="700" loading="lazy" src="/assets/icon-respy.webp" style="display:block;width:100%;height:100%;border-radius:inherit;corner-shape:inherit;object-position:center;object-fit:cover" width="700"/>
 									</div>
 								</div>
 							</div>
@@ -204,10 +207,88 @@
 	/* =======================================
 	   ESQUERDA: Linhas e Chips 3D
 	   ======================================= */
+	.bottleneck-chip-wrap {
+		flex: 1 0 0px;
+		gap: 0px;
+		height: 420px;
+		overflow: visible;
+		position: relative;
+		width: 1px;
+	}
+
 	.bottleneck-lines-container {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		z-index: 0;
+		pointer-events: none;
 		opacity: 0;
 		transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-		pointer-events: none;
+		-webkit-mask: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 7%) add;
+		mask: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 7%) add;
+	}
+
+	.framer-1sy5he3 {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 156px;
+		position: relative;
+		overflow: visible;
+	}
+
+	.framer-1krqbvw {
+		flex: 1 0 0px;
+		width: 100%;
+		height: 100%;
+		position: relative;
+		overflow: visible;
+	}
+
+	.framer-4j6m4t-container {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 31px;
+		z-index: 0;
+	}
+
+	.framer-1vqkf2g-container {
+		position: absolute;
+		top: calc(46.1538% - 1px);
+		left: 0;
+		right: 0;
+		height: 2px;
+		z-index: 0;
+	}
+
+	.framer-tbzhx4-container {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 43px;
+		z-index: 0;
+	}
+
+	.framer-1krqbvw svg {
+		width: 100%;
+		height: 100%;
+		overflow: visible;
+		display: block;
+	}
+
+	/* Efeito de feixe de luz que percorre os circuitos */
+	.shimmer-pulse {
+		stroke-dasharray: 35 100;
+		stroke-dashoffset: 170;
+		opacity: 0;
+		will-change: stroke-dashoffset, opacity;
 	}
 
 	.bottleneck-floating-chip {
@@ -299,8 +380,87 @@
 	/* =======================================
 	   ESTADO ATIVADO (IS-AFTER)
 	   ======================================= */
-	:global(.framer-lvgkav.is-after) .bottleneck-lines-container {
+	:global(.framer-lvgkav.is-after) .bottleneck-lines-container,
+	:global(#bottleneck-section.is-after) .bottleneck-lines-container {
 		opacity: 1;
+	}
+
+	:global(.framer-lvgkav.is-after) .pulse-top,
+	:global(#bottleneck-section.is-after) .pulse-top {
+		animation: beamTravelTop 4s linear infinite;
+	}
+
+	:global(.framer-lvgkav.is-after) .pulse-center,
+	:global(#bottleneck-section.is-after) .pulse-center {
+		animation: beamTravelCenter 5.7s linear infinite;
+	}
+
+	:global(.framer-lvgkav.is-after) .pulse-bottom,
+	:global(#bottleneck-section.is-after) .pulse-bottom {
+		animation: beamTravelBottom 5.2s linear 0.2s infinite;
+	}
+
+	@keyframes beamTravelTop {
+		0% {
+			stroke-dashoffset: 170;
+			opacity: 0;
+		}
+		2% {
+			opacity: 1;
+		}
+		73% {
+			opacity: 1;
+		}
+		75% {
+			stroke-dashoffset: 35;
+			opacity: 0;
+		}
+		100% {
+			stroke-dashoffset: 35;
+			opacity: 0;
+		}
+	}
+
+	@keyframes beamTravelCenter {
+		0% {
+			stroke-dashoffset: 170;
+			opacity: 0;
+		}
+		1.5% {
+			opacity: 1;
+		}
+		86.2% {
+			opacity: 1;
+		}
+		87.72% {
+			stroke-dashoffset: 35;
+			opacity: 0;
+		}
+		100% {
+			stroke-dashoffset: 35;
+			opacity: 0;
+		}
+	}
+
+	@keyframes beamTravelBottom {
+		0% {
+			stroke-dashoffset: 170;
+			opacity: 0;
+		}
+		2% {
+			opacity: 1;
+		}
+		75% {
+			opacity: 1;
+		}
+		76.92% {
+			stroke-dashoffset: 35;
+			opacity: 0;
+		}
+		100% {
+			stroke-dashoffset: 35;
+			opacity: 0;
+		}
 	}
 
 	:global(.framer-lvgkav.is-after) .bottleneck-floating-chip {
@@ -336,6 +496,40 @@
 
 		.bottleneck-scroll-trigger {
 			height: 40vh;
+		}
+
+		.bottleneck-chip-wrap {
+			flex: none;
+			height: 140px;
+			width: 100%;
+			z-index: 1;
+		}
+
+		.bottleneck-lines-container {
+			-webkit-mask: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,1) 7%, rgba(0,0,0,1) 93.5%, rgba(0, 0, 0, 0) 101.5%) add;
+			mask: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,1) 7%, rgba(0,0,0,1) 93.5%, rgba(0, 0, 0, 0) 101.5%) add;
+			height: 111px;
+		}
+
+		.framer-1xdfzg0 {
+			height: 110px;
+			width: 110px;
+		}
+
+		.framer-kkg5eu {
+			height: 110px;
+		}
+
+		.framer-fuyh3o-container {
+			height: 97px;
+		}
+
+		.bottleneck-floating-chip {
+			transform: translate(-50%, -50%) translateX(-20px) translateY(-50px) scale(1.05) rotate(-15deg);
+		}
+
+		:global(.framer-lvgkav.is-after) .bottleneck-floating-chip {
+			transform: translate(-50%, -50%) translateX(0px) translateY(0px) scale(1) rotate(0deg);
 		}
 	}
 </style>
