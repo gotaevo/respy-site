@@ -494,8 +494,9 @@
 			top: unset;
 		}
 
+		/* No celular o card não fica fixo, então o gatilho não precisa ocupar espaço */
 		.bottleneck-scroll-trigger {
-			height: 40vh;
+			height: 0;
 		}
 
 		.bottleneck-chip-wrap {
@@ -531,6 +532,18 @@
 		:global(.framer-lvgkav.is-after) .bottleneck-floating-chip {
 			transform: translate(-50%, -50%) translateX(0px) translateY(0px) scale(1) rotate(0deg);
 		}
+
+		/* Card mais alto e lista mais compacta para o estado "Com o Respy" caber inteiro */
+		.bottleneck-card {
+			height: 500px !important;
+		}
+		.bottleneck-card-layer {
+			padding: 22px;
+		}
+		.bottleneck-card-after h5 {
+			font-size: 16px !important;
+			line-height: 1.35 !important;
+		}
 	}
 </style>
 
@@ -538,6 +551,8 @@
 	function setupBottleneckScroll() {
 		const section = document.getElementById('bottleneck-section');
 		const trigger = document.getElementById('snap');
+		const card = section?.querySelector('.bottleneck-card');
+		const mobile = window.matchMedia('(max-width: 809.98px)');
 
 		if (!section || !trigger) return;
 
@@ -546,11 +561,14 @@
 		function checkScroll() {
 			if (!ticking) {
 				window.requestAnimationFrame(() => {
-					const rect = trigger.getBoundingClientRect();
 					const windowHeight = window.innerHeight || document.documentElement.clientHeight;
 
-					// Dispara quando o topo do trigger atinge 75% da altura da janela
-					const isPast = rect.top <= windowHeight * 0.75;
+					// Desktop/tablet: dispara quando o topo do trigger atinge 75% da altura da janela.
+					// Celular (card não fica fixo): dispara quando o topo do card passa de 55% da janela,
+					// para a troca acontecer enquanto o card está entrando na tela.
+					const isPast = mobile.matches && card
+						? card.getBoundingClientRect().top <= windowHeight * 0.55
+						: trigger.getBoundingClientRect().top <= windowHeight * 0.75;
 
 					if (isPast) {
 						section.classList.add('is-after');

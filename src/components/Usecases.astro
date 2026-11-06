@@ -210,3 +210,44 @@
 		});
 	}
 </script>
+
+<style>
+	/* Celular: card de texto do tamanho do conteúdo e sem a citação por cima da foto */
+	@media (max-width: 809.98px) {
+		section[data-framer-name="Na rotina da sua equipe"] .framer-19kt8jp {
+			height: auto !important;
+			min-height: 0 !important;
+		}
+		section[data-framer-name="Na rotina da sua equipe"] .framer-19kt8jp > div[data-tab-panel] {
+			height: auto !important;
+		}
+	}
+	@media (max-width: 1199.98px) {
+		section[data-framer-name="Na rotina da sua equipe"] .framer-86ib0a [data-right-panel] > div:has(> p.framer-styles-preset-mhwbe4) {
+			display: none !important;
+		}
+	}
+</style>
+
+<style>
+	/* Celular e tablet: cards da interface sempre por cima da foto */
+	@media (max-width: 1199.98px) {
+		section[data-framer-name="Na rotina da sua equipe"] .framer-86ib0a [data-right-panel] > [class*="-container"]:not([data-framer-name^="Front"]) {
+			z-index: 3 !important;
+		}
+	}
+	/* Celular: foto começa abaixo dos cards, mostrando o rosto inteiro */
+	@media (max-width: 809.98px) {
+		section[data-framer-name="Na rotina da sua equipe"] .framer-86ib0a {
+			height: 520px !important;
+		}
+		section[data-framer-name="Na rotina da sua equipe"] .framer-86ib0a [data-right-panel] > [data-framer-name^="Image"] {
+			top: 150px !important;
+			bottom: 0 !important;
+			height: auto !important;
+		}
+		section[data-framer-name="Na rotina da sua equipe"] .framer-86ib0a [data-right-panel] > [data-framer-name^="Image"] img {
+			object-position: center top !important;
+		}
+	}
+</style>

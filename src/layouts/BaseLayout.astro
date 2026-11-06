@@ -47,10 +47,115 @@ const {
 			.framer-w5Elw .framer-dmn2xr {
 				border-radius: 9999px !important;
 			}
+
+			/* Hover dos botões e links (as camadas de hover do Framer ficavam paradas no export) */
+			.framer-H6gFU [data-framer-name='BG hover'],
+			.framer-w5Elw [data-framer-name='BG hover'],
+			.framer-eVtHy [data-framer-name='BG hover'],
+			.framer-eVtHy .framer-bsxc0b,
+			.framer-lsFo8 [data-framer-name='BG hover'],
+			.framer-7NR5t [data-framer-name='BG'],
+			.framer-yBymX [data-framer-name='Border'] {
+				transition: opacity 0.25s ease, transform 0.25s ease;
+			}
+			.framer-H6gFU,
+			.framer-w5Elw {
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
+			}
+			@media (hover: hover) {
+				.framer-H6gFU:hover [data-framer-name='BG hover'],
+				.framer-w5Elw:hover [data-framer-name='BG hover'],
+				.framer-eVtHy:hover [data-framer-name='BG hover'],
+				.framer-lsFo8:hover [data-framer-name='BG hover'],
+				.framer-7NR5t:hover [data-framer-name='BG'] {
+					opacity: 1 !important;
+				}
+				.framer-H6gFU:hover,
+				.framer-w5Elw:hover {
+					transform: translateY(-1px);
+				}
+				.framer-eVtHy:hover .framer-bsxc0b {
+					background-color: var(--token-9d3ef7dc-eeb5-4f6a-982b-fd13c7660eb7, rgb(14, 130, 246)) !important;
+				}
+				.framer-eVtHy:hover .framer-1vjq53d p {
+					--framer-text-color: #fff !important;
+					color: #fff !important;
+				}
+				.framer-eVtHy:hover .framer-NoV3A {
+					--wdq76p: #fff !important;
+				}
+				.framer-yBymX:hover [data-framer-name='Border'] {
+					opacity: 1 !important;
+					transform: scale(1) !important;
+				}
+			}
+			.framer-H6gFU:focus-visible,
+			.framer-w5Elw:focus-visible,
+			.framer-eVtHy:focus-visible,
+			.framer-lsFo8:focus-visible,
+			.framer-7NR5t:focus-visible,
+			.framer-yBymX:focus-visible {
+				outline: 2px solid #0e82f6;
+				outline-offset: 3px;
+			}
+
+			/* Entrada suave dos blocos ao rolar a página */
+			.rv {
+				opacity: 0;
+				transform: translateY(18px);
+				transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+				transition-delay: var(--rv-delay, 0ms);
+			}
+			.rv.rv-in {
+				opacity: 1;
+				transform: none;
+			}
+			@media (prefers-reduced-motion: reduce) {
+				.rv {
+					opacity: 1;
+					transform: none;
+					transition: none;
+				}
+			}
 		</style>
 	</head>
 	<body>
 		<slot />
+
+		<script>
+			// Revela títulos e cards ao entrarem na tela. Só age no que está abaixo da dobra no carregamento.
+			const groups = [
+				'main section [data-framer-name="Heading"]',
+				'section[data-framer-name="Features"] [data-framer-name^="Bento "]:not([data-framer-name="Bento top"]):not([data-framer-name="Bento bottom"])',
+				'section[data-framer-name="Na rotina da sua equipe"] .framer-1tuj1vf > *',
+				'.rb-bento > .rb-card',
+				'#pricing .framer-1ckksz1 > *',
+				'#pricing .rp-included',
+				'section[data-framer-name="About"] .framer-15r2t5x > *',
+				'#faq .framer-TrN3l > [class*="-container"]',
+			];
+			const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			if (!reduce && 'IntersectionObserver' in window) {
+				const observer = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((entry) => {
+							if (!entry.isIntersecting) return;
+							entry.target.classList.add('rv-in');
+							observer.unobserve(entry.target);
+						});
+					},
+					{ rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
+				);
+				groups.forEach((selector) => {
+					document.querySelectorAll<HTMLElement>(selector).forEach((el, index) => {
+						if (el.getBoundingClientRect().top < window.innerHeight) return;
+						el.style.setProperty('--rv-delay', `${Math.min(index % 4, 3) * 80}ms`);
+						el.classList.add('rv');
+						observer.observe(el);
+					});
+				});
+			}
+		</script>
 
 		<!-- React Grab: ativado apenas em modo de desenvolvimento local -->
 		{import.meta.env.DEV && (
