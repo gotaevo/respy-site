@@ -9,11 +9,9 @@ import TrustedBy from '../components/TrustedBy.astro';
 import Bottleneck from '../components/Bottleneck.astro';
 import Features from '../components/Features.astro';
 import Usecases from '../components/Usecases.astro';
-import RevenueEngine from '../components/RevenueEngine.astro';
 import CustomerStories from '../components/CustomerStories.astro';
 import Pricing from '../components/Pricing.astro';
 import About from '../components/About.astro';
-import Blog from '../components/Blog.astro';
 import FAQ from '../components/FAQ.astro';
 import CTA from '../components/CTA.astro';
 import Footer from '../components/Footer.astro';
@@ -43,11 +41,9 @@ import Footer from '../components/Footer.astro';
 					<Bottleneck />
 					<Features />
 					<Usecases />
-					<RevenueEngine />
 					<CustomerStories />
 					<Pricing />
 					<About />
-					<Blog />
 					<FAQ />
 					<CTA />
 				</main>
@@ -89,11 +85,6 @@ import Footer from '../components/Footer.astro';
 			window.addEventListener('scroll', onScroll, { passive: true });
 			onScroll();
 		}
-
-		// Alternância entre os planos mensal e anual
-		const monthlyBtn = document.querySelector('[data-framer-name="Mensal"]');
-		const annualBtn = document.querySelector('[data-framer-name="Anual"]');
-		const priceSpans = document.querySelectorAll('number-flow-react span, .framer-text span');
 
 		// FAQ Accordion
 		document.querySelectorAll('[data-framer-name="FAQ"] .framer-1tza9rs').forEach((faqItem) => {
