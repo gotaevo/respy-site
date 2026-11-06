@@ -59,11 +59,12 @@ import Footer from '../components/Footer.astro';
 
 	<script>
 		// Smooth anchor scrolling
-		document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+		document.querySelectorAll('a[href^="#"], a[href^="/#"]').forEach((anchor) => {
 			anchor.addEventListener('click', function (e) {
-				const href = this.getAttribute('href');
-				if (href && href !== '#') {
-					const target = document.querySelector(href);
+				const href = this.getAttribute('href') ?? '';
+				const hash = href.slice(href.indexOf('#'));
+				if (hash && hash !== '#') {
+					const target = document.querySelector(hash);
 					if (target) {
 						e.preventDefault();
 						target.scrollIntoView({ behavior: 'smooth' });
