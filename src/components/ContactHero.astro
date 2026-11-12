@@ -26,7 +26,7 @@
 			<div class="ch-bottom">
 				<p class="ch-eyebrow">Prefere comparar os planos?</p>
 				<p class="ch-alt">
-					Starter, Plus e Pro com os mesmos recursos.
+					Compare preços, limites e a Respy AI de cada plano.
 					<a href="/#pricing">Ver planos <span aria-hidden="true">↗</span></a>
 				</p>
 			</div>
@@ -57,6 +57,7 @@
 			</label>
 			<input class="ch-hp" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" />
 			<button class="ch-submit" type="submit">Enviar mensagem</button>
+			<div class="ch-msgs" hidden><span data-msg="invalid">Preencha nome, empresa, um e-mail válido e a mensagem.</span><span data-msg="unavailable">O envio está indisponível no momento. Tente novamente mais tarde.</span><span data-msg="sending">Enviando...</span><span data-msg="ok">Mensagem enviada. A equipe vai responder no seu e-mail.</span><span data-msg="error">Não foi possível enviar. Verifique sua conexão e tente de novo.</span></div>
 			<p class="ch-status" role="status" aria-live="polite"></p>
 		</form>
 	</div>
@@ -307,6 +308,7 @@
 		const status = form.querySelector<HTMLElement>('.ch-status');
 		const button = form.querySelector<HTMLButtonElement>('.ch-submit');
 		const honeypot = form.querySelector<HTMLInputElement>('.ch-hp');
+		const msg = (key: string) => form.querySelector(`.ch-msgs [data-msg="${key}"]`)?.textContent ?? '';
 		const required = [...form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[required]')];
 
 		const setStatus = (text: string, tone?: 'ok' | 'error') => {
@@ -327,17 +329,17 @@
 			if (invalid.length) {
 				invalid.forEach((field) => field.setAttribute('aria-invalid', 'true'));
 				invalid[0].focus();
-				setStatus('Preencha nome, empresa, um e-mail válido e a mensagem.', 'error');
+				setStatus(msg('invalid'), 'error');
 				return;
 			}
 			if (!endpoint) {
-				setStatus('O envio está indisponível no momento. Tente novamente mais tarde.', 'error');
+				setStatus(msg('unavailable'), 'error');
 				return;
 			}
 
 			const data = Object.fromEntries(new FormData(form).entries());
 			if (button) button.disabled = true;
-			setStatus('Enviando...');
+			setStatus(msg('sending'));
 			try {
 				// text/plain evita o preflight de CORS que o Apps Script não responde
 				await fetch(endpoint, {
@@ -347,9 +349,9 @@
 					body: JSON.stringify({ type: 'contato', ...data, page: location.pathname }),
 				});
 				form.reset();
-				setStatus('Mensagem enviada. A equipe vai responder no seu e-mail.', 'ok');
+				setStatus(msg('ok'), 'ok');
 			} catch {
-				setStatus('Não foi possível enviar. Verifique sua conexão e tente de novo.', 'error');
+				setStatus(msg('error'), 'error');
 			} finally {
 				if (button) button.disabled = false;
 			}

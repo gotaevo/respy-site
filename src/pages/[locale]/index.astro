@@ -1,0 +1,13 @@
+---
+// Versões traduzidas (/en, /es, /pt). Os textos são trocados no middleware (src/i18n).
+export const prerender = true;
+
+import { locales, prefixedLocales } from '../../i18n/config';
+import HomePage from '../../components/pages/HomePage.astro';
+
+export function getStaticPaths() {
+	return prefixedLocales.map((locale) => ({ params: { locale: locales[locale].prefix } }));
+}
+---
+
+<HomePage />

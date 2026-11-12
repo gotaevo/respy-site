@@ -28,7 +28,7 @@
 				<button type="button" aria-pressed="false" aria-label="Equipe"></button>
 			</div>
 		</div>
-		<div class="rb-slides" aria-hidden="true">
+		<div class="rb-copy" hidden><div><span>Painel</span><span>Veja a operação do dia em uma tela</span><span>Clientes no período, fila, vendas registradas e quem está esperando resposta há mais de 15 minutos.</span></div><div><span>Follow-up</span><span>Nenhum orçamento fica sem retorno</span><span>Monte uma sequência de mensagens e o Respy envia cada etapa no dia certo.</span></div><div><span>Equipe</span><span>Cada atendente sabe o que é dele</span><span>Veja quem está disponível, quanto cada um está atendendo e quantos clientes estão na fila.</span></div></div><div class="rb-slides" aria-hidden="true">
 			<div class="rb-slide" data-rb-active="true">
 				<div class="rb-win">
 					<div class="rb-win-h"><b>Painel</b><div class="rb-seg"><span>Hoje</span><span class="rb-on">7 dias</span><span>15</span><span>30</span></div></div>
@@ -280,11 +280,11 @@
 <script>
 	const carousel = document.querySelector('[data-rb-carousel]');
 	if (carousel) {
-		const copy = [
-			{ eyebrow: 'Painel', title: 'Veja a operação do dia em uma tela', text: 'Clientes no período, fila, vendas registradas e quem está esperando resposta há mais de 15 minutos.' },
-			{ eyebrow: 'Follow-up', title: 'Nenhum orçamento fica sem retorno', text: 'Monte uma sequência de mensagens e o Respy envia cada etapa no dia certo.' },
-			{ eyebrow: 'Equipe', title: 'Cada atendente sabe o que é dele', text: 'Veja quem está disponível, quanto cada um está atendendo e quantos clientes estão na fila.' },
-		];
+		// Textos dos slides vêm do HTML (traduzidos junto com a página)
+		const copy = [...carousel.querySelectorAll('.rb-copy > div')].map((item) => {
+			const [eyebrow, title, text] = [...item.querySelectorAll('span')].map((span) => span.textContent ?? '');
+			return { eyebrow, title, text };
+		});
 		const slides = carousel.querySelectorAll<HTMLElement>('.rb-slide');
 		const dots = carousel.querySelectorAll<HTMLButtonElement>('.rb-dots button');
 		const eyebrow = carousel.querySelector('[data-rb-eyebrow]');

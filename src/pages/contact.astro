@@ -1,43 +1,7 @@
 ---
 export const prerender = true;
 
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SvgDefs from '../components/SvgDefs.astro';
-import Header from '../components/Header.astro';
-import ContactHero from '../components/ContactHero.astro';
-import CTA from '../components/CTA.astro';
-import Footer from '../components/Footer.astro';
+import ContactPage from '../components/pages/ContactPage.astro';
 ---
 
-<BaseLayout
-	title="Fale com a equipe — Respy"
-	description="Tire dúvidas sobre planos, implantação e como o Respy organiza o atendimento da sua empresa no WhatsApp."
-	lang="pt-BR"
->
-	<div data-framer-generated-page="" id="main">
-		<div
-			class="framer-gsDDa framer-WBrhW framer-yAJxk framer-9OjJ3 framer-0FlRU framer-1fuuwg"
-			data-layout-template="true"
-			data-selection="true"
-			style="--1vm7ife:130px 0px 0px 0px;--ihjje9:110px 0px 0px 0px;min-height:100vh;width:auto"
-		>
-			<div
-				class="framer-VZ7wD framer-RXgLj framer-EhUGu framer-l5XXk framer-9OjJ3 framer-yAJxk framer-0FlRU framer-wn90E framer-guVoT framer-72rtr7"
-				data-framer-root=""
-				style="min-height:100vh;width:auto;display:contents"
-			>
-				<div class="framer-eywkka" data-framer-name="Header change trigger" id="header-change"></div>
-				<main class="framer-1v8dk9r" data-framer-name="Main">
-					<ContactHero />
-					<CTA />
-				</main>
-				<div id="overlay"></div>
-				<div class="framer-5gd35e"></div>
-				<Header />
-				<Footer />
-			</div>
-		</div>
-	</div>
-
-	<SvgDefs />
-</BaseLayout>
+<ContactPage />
