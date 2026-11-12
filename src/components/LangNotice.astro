@@ -1,0 +1,199 @@
+---
+// Faixa de idioma: sugere a versão no idioma do navegador ou, depois de um redirecionamento
+// automático, oferece voltar para o português do Brasil.
+---
+
+<div class="ln" role="region" aria-label="Idioma" hidden>
+	<p class="ln-text"></p>
+	<a class="ln-action" href="/"></a>
+	<button class="ln-close" type="button" aria-label="Fechar">
+		<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
+	</button>
+</div>
+
+<style>
+	.ln {
+		position: fixed;
+		left: 50%;
+		bottom: max(16px, env(safe-area-inset-bottom, 0px));
+		z-index: 30;
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		width: max-content;
+		max-width: calc(100vw - 24px);
+		padding: 10px 10px 10px 18px;
+		box-sizing: border-box;
+		transform: translateX(-50%);
+		background: #fff;
+		border-radius: 18px;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 18px 40px -12px rgba(20, 30, 60, 0.32);
+		font-family: 'Inter', 'Inter Placeholder', system-ui, sans-serif;
+		color: #141414;
+		animation: ln-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+	}
+	.ln[hidden] {
+		display: none;
+	}
+	.ln-text {
+		margin: 0;
+		font-size: 14px;
+		line-height: 1.4;
+	}
+	.ln-action {
+		flex: none;
+		padding: 9px 16px;
+		border-radius: 9999px;
+		background: #141414;
+		color: #fff;
+		font-size: 14px;
+		font-weight: 600;
+		text-decoration: none;
+		white-space: nowrap;
+		transition: background-color 0.2s ease;
+	}
+	.ln-action:hover {
+		background: #0e82f6;
+	}
+	.ln-close {
+		flex: none;
+		display: grid;
+		place-items: center;
+		width: 32px;
+		height: 32px;
+		padding: 0;
+		border: 0;
+		border-radius: 10px;
+		background: transparent;
+		color: #6b7280;
+		cursor: pointer;
+	}
+	.ln-close:hover {
+		background: #f2f2f2;
+		color: #141414;
+	}
+	.ln-close svg {
+		width: 16px;
+		height: 16px;
+	}
+	.ln-action:focus-visible,
+	.ln-close:focus-visible {
+		outline: 2px solid #0e82f6;
+		outline-offset: 2px;
+	}
+	@keyframes ln-in {
+		from {
+			opacity: 0;
+			transform: translate(-50%, 12px);
+		}
+	}
+	@media (max-width: 809.98px) {
+		.ln {
+			flex-wrap: wrap;
+			width: auto;
+			left: 12px;
+			right: 12px;
+			transform: none;
+			padding: 14px 14px 14px 16px;
+			animation-name: ln-in-mobile;
+		}
+		.ln-text {
+			flex: 1 1 calc(100% - 44px);
+		}
+		.ln-close {
+			order: 2;
+		}
+		.ln-action {
+			order: 3;
+			flex: 1 1 100%;
+			text-align: center;
+		}
+		@keyframes ln-in-mobile {
+			from {
+				opacity: 0;
+				transform: translateY(12px);
+			}
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.ln {
+			animation: none;
+		}
+	}
+</style>
+
+<script>
+	import { locales, localeFromPath, localizePath, stripLocale, translatedPaths, type Locale } from '../i18n/config';
+	import { AUTO_COOKIE, CHOICE_COOKIE, pickLocale } from '../i18n/detect';
+
+	// Textos da faixa em cada idioma (a faixa fala no idioma sugerido, não no da página)
+	const suggestText: Record<Locale, { text: string; action: string; close: string }> = {
+		'pt-BR': { text: 'Esta página também está disponível em português.', action: 'Ver em português', close: 'Fechar' },
+		en: { text: 'This page is also available in English.', action: 'View in English', close: 'Close' },
+		es: { text: 'Esta página también está disponible en español.', action: 'Ver en español', close: 'Cerrar' },
+		'pt-PT': { text: 'Esta página também está disponível em português de Portugal.', action: 'Ver versão de Portugal', close: 'Fechar' },
+	};
+	const backText: Partial<Record<Locale, string>> = {
+		en: 'You are seeing the English version.',
+		es: 'Estás viendo la versión en español.',
+		'pt-PT': 'Está a ver a versão de Portugal.',
+	};
+
+	const readCookie = (name: string) =>
+		document.cookie
+			.split('; ')
+			.find((row) => row.startsWith(`${name}=`))
+			?.split('=')[1];
+	const saveChoice = (locale: Locale) => {
+		document.cookie = `${CHOICE_COOKIE}=${locale}; Path=/; Max-Age=31536000; SameSite=Lax`;
+	};
+
+	// Qualquer troca pelo seletor de idioma fica salva
+	document.addEventListener('click', (event) => {
+		const link = (event.target as Element | null)?.closest<HTMLAnchorElement>('.rh-lang a[hreflang]');
+		const locale = link?.getAttribute('hreflang') as Locale | null;
+		if (locale && locale in locales) saveChoice(locale);
+	});
+
+	const notice = document.querySelector<HTMLElement>('.ln');
+	const current = localeFromPath(location.pathname);
+	const basePath = stripLocale(location.pathname).replace(/\/$/, '') || '/';
+	const chosen = readCookie(CHOICE_COOKIE);
+	const wasRedirected = readCookie(AUTO_COOKIE) === '1';
+
+	const show = (text: string, action: string, href: string, target: Locale, close: string) => {
+		if (!notice) return;
+		const textEl = notice.querySelector('.ln-text');
+		const actionEl = notice.querySelector<HTMLAnchorElement>('.ln-action');
+		const closeEl = notice.querySelector<HTMLButtonElement>('.ln-close');
+		if (!textEl || !actionEl || !closeEl) return;
+		textEl.textContent = text;
+		actionEl.textContent = action;
+		actionEl.href = href;
+		actionEl.hreflang = target;
+		actionEl.lang = target;
+		closeEl.setAttribute('aria-label', close);
+		actionEl.addEventListener('click', () => saveChoice(target));
+		closeEl.addEventListener('click', () => {
+			saveChoice(current);
+			notice.hidden = true;
+		});
+		notice.hidden = false;
+	};
+
+	if (notice && translatedPaths.includes(basePath)) {
+		if (wasRedirected) {
+			// Chegou aqui pelo redirecionamento automático: oferece voltar para o português do Brasil
+			document.cookie = `${AUTO_COOKIE}=; Path=/; Max-Age=0; SameSite=Lax`;
+			const text = backText[current];
+			if (text) show(text, 'Ver em português (Brasil)', localizePath(basePath, 'pt-BR'), 'pt-BR', suggestText[current].close);
+		} else if (!chosen) {
+			// Sem escolha salva: sugere o idioma do navegador quando for diferente do da página
+			const guess = pickLocale(navigator.languages?.length ? navigator.languages : [navigator.language]);
+			if (guess && guess !== current) {
+				const copy = suggestText[guess];
+				show(copy.text, copy.action, localizePath(basePath, guess), guess, copy.close);
+			}
+		}
+	}
+</script>

@@ -1,5 +1,6 @@
 ---
 import '../styles/framer.css';
+import LangNotice from '../components/LangNotice.astro';
 import { locales, localeFromPath, stripLocale, localizePath, translatedPaths, type Locale } from '../i18n/config';
 
 interface Props {
@@ -138,6 +139,7 @@ const ogLocale = currentLocale.replace('-', '_');
 	</head>
 	<body>
 		<slot />
+		<LangNotice />
 
 		<script>
 			// Revela títulos e cards ao entrarem na tela. Só age no que está abaixo da dobra no carregamento.
